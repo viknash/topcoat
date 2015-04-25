@@ -4,3 +4,4 @@ tmp
 .DS_Store
 src/
 .tern-port
+/css/*.map
