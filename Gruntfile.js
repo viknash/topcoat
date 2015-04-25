@@ -20,7 +20,7 @@ var path = require('path'),
     chromiumSrc = process.env.CHROMIUM_SRC || "";
 
 
-module.exports = function(grunt) {
+module.exports = function (grunt) {
     'use strict';
 
     grunt.initConfig({
@@ -101,16 +101,16 @@ module.exports = function(grunt) {
                         "homeURL": "http://topcoat.io",
                         "siteNav": [
                             {
-                            "url": "http://topcoat.io/topcoat",
-                            "text": "Demo"
+                                "url": "http://topcoat.io/topcoat",
+                                "text": "Demo"
                         },
                             {
-                            "url": "http://bench.topcoat.io/",
-                            "text": "Benchmarks"
+                                "url": "http://bench.topcoat.io/",
+                                "text": "Benchmarks"
                         },
                             {
-                            "url": "http://topcoat.io/blog",
-                            "text": "Blog"
+                                "url": "http://topcoat.io/blog",
+                                "text": "Blog"
                         }
                         ]
                     }
@@ -138,6 +138,9 @@ module.exports = function(grunt) {
         },
 
         cssmin: {
+            options: {
+                sourceMap: true
+            },
             minify: {
                 expand: true,
                 cwd: 'css',
@@ -231,7 +234,7 @@ module.exports = function(grunt) {
         },
 
         watch: {
-            files: ['src/**/*.styl'],
+            files: ['src/**/*.styl', './Gruntfile.js'],
             tasks: ['compile']
         }
 
@@ -255,9 +258,9 @@ module.exports = function(grunt) {
     // Default task.
     grunt.registerTask('default', ['clean', 'stylus', 'autoprefixer', 'cssmin', 'topdoc', 'copy:release']);
     grunt.registerTask('release', ['default', 'clean:src']);
-    grunt.registerTask('compile', ['topcoat:compile', 'topdoc', 'copy:release']);
+    grunt.registerTask('compile', ['stylus', 'autoprefixer', 'cssmin', 'topdoc', 'copy:release']);
 
-    grunt.registerTask('telemetry', '', function(platform, theme) {
+    grunt.registerTask('telemetry', '', function (platform, theme) {
         if (chromiumSrc === "") grunt.fail.warn("Set CHROMIUM_SRC to point to the correct location\n");
         grunt.task.run('check_chromium_src', 'perf:'.concat(platform || 'mobile').concat(':').concat(theme || 'light'), 'htmlmin:telemetry', 'copy:telemetry');
     });
