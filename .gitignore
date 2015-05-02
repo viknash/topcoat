@@ -4,4 +4,10 @@ tmp
 .DS_Store
 src/
 .tern-port
-/css/*.map
+css/
+demo/css/
+demo/fonts/*.svg
+demo/fonts/*.css
+demo/js/
+/img/search.svg
+/img/search_light.svg
